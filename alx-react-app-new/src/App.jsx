@@ -3,21 +3,17 @@ import UserProfile from "./components/UserProfile";
 import MainContent from "./components/MainContent";
 import Footer from "./components/Footer";
 
-// ⭐ NEW IMPORT
-import Counter from "./components/Counter";
+
+import ProfilePage from './ProfilePage';
+import UserContext from './UserContext';
 
 function App() {
+  const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
+
   return (
-    <>
-      <Header />
-      <UserProfile name="BK" age="29" bio="Frontend developer" />
-      <MainContent />
-
-      {/* ⭐ NEW COMPONENT */}
-      <Counter />
-
-      <Footer />
-    </>
+    <UserContext.Provider value={userData}>
+      <ProfilePage />
+    </UserContext.Provider>
   );
 }
 
