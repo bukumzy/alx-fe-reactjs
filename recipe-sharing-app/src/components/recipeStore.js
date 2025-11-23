@@ -1,21 +1,44 @@
-
 import { create } from "zustand";
 
 export const useRecipeStore = create((set) => ({
   recipes: [],
+  searchTerm: "",
+  filteredRecipes: [],
 
   addRecipe: (newRecipe) =>
-    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
+    set((state) => {
+      const recipes = [...state.recipes, newRecipe];
+      const filteredRecipes = recipes.filter((r) =>
+        r.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+      );
+      return { recipes, filteredRecipes };
+    }),
 
   updateRecipe: (updatedRecipe) =>
-    set((state) => ({
-      recipes: state.recipes.map((r) =>
+    set((state) => {
+      const recipes = state.recipes.map((r) =>
         r.id === updatedRecipe.id ? updatedRecipe : r
-      ),
-    })),
+      );
+      const filteredRecipes = recipes.filter((r) =>
+        r.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+      );
+      return { recipes, filteredRecipes };
+    }),
 
   deleteRecipe: (id) =>
-    set((state) => ({
-      recipes: state.recipes.filter((r) => r.id !== id),
-    })),
+    set((state) => {
+      const recipes = state.recipes.filter((r) => r.id !== id);
+      const filteredRecipes = recipes.filter((r) =>
+        r.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+      );
+      return { recipes, filteredRecipes };
+    }),
+
+  setSearchTerm: (term) =>
+    set((state) => {
+      const filteredRecipes = state.recipes.filter((r) =>
+        r.title.toLowerCase().includes(term.toLowerCase())
+      );
+      return { searchTerm: term, filteredRecipes };
+    }),
 }));
