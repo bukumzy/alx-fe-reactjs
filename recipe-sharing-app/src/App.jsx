@@ -9,7 +9,7 @@ import RecipeList from "./components/RecipeList";
 import RecipeDetails from "./components/RecipeDetails";
 
 import SearchBar from "./components/SearchBar";
-import FavouritesList from "./components/FavouritesList";
+import FavoritesList from "./components/FavoritesList";
 import RecommendationsList from "./components/RecommendationsList";
 
 function App() {
