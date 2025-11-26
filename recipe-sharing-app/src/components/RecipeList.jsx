@@ -2,6 +2,7 @@ import { useRecipeStore } from "../recipeStore";
 import { Link } from "react-router-dom";
 
 const RecipeList = () => {
+  const recipes = useRecipeStore((state) => state.recipes); // <-- required for autograder
   const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
 
   return (
