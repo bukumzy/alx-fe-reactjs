@@ -7,6 +7,14 @@ export const useRecipeStore = create((set) => ({
   favorites: [],
   recommendations: [],
 
+  setRecipes: (recipes) =>
+    set((state) => ({
+      recipes,
+      filteredRecipes: recipes.filter((r) =>
+        r.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+      ),
+    })),
+
   addRecipe: (newRecipe) =>
     set((state) => {
       const recipes = [...state.recipes, newRecipe];
