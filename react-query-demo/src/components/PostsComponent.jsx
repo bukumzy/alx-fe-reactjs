@@ -6,10 +6,19 @@ function fetchPosts() {
 }
 
 export default function PostsComponent() {
-  const { data, isLoading, isError, error, refetch } = useQuery("posts", fetchPosts);
+  const { data, isLoading, isError, error, refetch } = useQuery(
+    "posts",
+    fetchPosts,
+    {
+      cacheTime: 1000 * 60 * 5,
+      staleTime: 1000 * 60,
+      refetchOnWindowFocus: false,
+      keepPreviousData: true
+    }
+  );
 
   if (isLoading) return <p>Loading posts...</p>;
-  if (isError) return <p>Error fetching posts</p>; // you can log error too if needed
+  if (isError) return <p>Error fetching posts</p>;
 
   return (
     <div>
