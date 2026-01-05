@@ -1,7 +1,6 @@
-import { useState } from "react";
-import AddTodoForm from "./AddTodoForm";
+import React, { useState } from "react";
 
-export default function TodoList() {
+const TodoList = () => {
   const [todos, setTodos] = useState([
     { id: 1, text: "Learn React", completed: false },
     { id: 2, text: "Build a project", completed: false },
@@ -26,23 +25,21 @@ export default function TodoList() {
 
   return (
     <div>
-      <h2>Todo List</h2>
-      <AddTodoForm addTodo={addTodo} />
-
+      <h1>Todo List</h1>
       <ul>
         {todos.map((todo) => (
           <li
             key={todo.id}
-            style={{ textDecoration: todo.completed ? "line-through" : "none", cursor: "pointer" }}
             onClick={() => toggleTodo(todo.id)}
+            style={{ textDecoration: todo.completed ? "line-through" : "none" }}
           >
             {todo.text}{" "}
-            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>
-              Delete
-            </button>
+            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
+
+export default TodoList;
